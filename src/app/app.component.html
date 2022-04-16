@@ -1,5 +1,6 @@
 <div class="main-page">
   <h1>Welcome to myFlix!</h1>
+  <!-- User Registration Button -->
   <button
     mat-raised-button
     (click)="openUserRegistrationDialog()"
@@ -8,8 +9,11 @@
   >
   Sign Up
   </button>
+  <!-- User Login Button -->
   <button
     mat-raised-button
+    (click)="openUserLoginDialog()"
+    style="margin-right: 10px;"
     color="primary"
   >
   Login
