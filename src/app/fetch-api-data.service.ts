@@ -22,22 +22,22 @@ export class UserRegistrationService {
   // Makes the api call for the user registration endpoint
   // Observable<any> is a TS type cast. HttpClient returns an observable. This allows you to process events asynchronously
 
-  public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
+  public userRegistration(userData: any): Observable<any> {
+    console.log(userData);
     // Similar to apiUrl/${users} in React
     // Using 'this.http' posts it to the API endpoint and returns the API's response
     // .pipe() combines multiple functions into a single function
     // takes catchError functions as its arguments and returns a new function that runs the composed functions in sequence
     return this.http
-      .post(apiUrl + 'users', userDetails)
+      .post(apiUrl + 'users', userData)
       .pipe(catchError(this.handleError));
   }
 
   // Makes the api call for the user login
-  public userLogin(userDetails: any): Observable<any> {
-    console.log(userDetails);
+  public userLogin(userData: any): Observable<any> {
+    console.log(userData);
     return this.http
-      .post(apiUrl + 'login', userDetails)
+      .post(apiUrl + 'login', userData)
       .pipe(catchError(this.handleError));
   }
 
@@ -92,9 +92,9 @@ export class UserRegistrationService {
   // Makes the api call to get a user by name
   getUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    const Username = localStorage.getItem('Username');
     return this.http
-      .get(apiUrl + `users/${username}`, {
+      .get(apiUrl + `users/${Username}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -105,9 +105,9 @@ export class UserRegistrationService {
   // Makes the api call to get a user's favorite movies
   getFavorites(): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    const Username = localStorage.getItem('Username');
     return this.http
-      .get(apiUrl + `users/${username}`, {
+      .get(apiUrl + `users/${Username}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -118,9 +118,9 @@ export class UserRegistrationService {
   // Makes the api call to add (post) a movie to favorites
   addFavorite(MovieId: string): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    const Username = localStorage.getItem('Username');
     return this.http
-      .post(apiUrl + `users/${username}/movies/${MovieId}`, null, {
+      .post(apiUrl + `users/${Username}/movies/${MovieId}`, null, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -131,9 +131,9 @@ export class UserRegistrationService {
   // Makes the api call to edit (put) user information
   editUser(userData: object): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    const Username = localStorage.getItem('Username');
     return this.http
-      .put(apiUrl + `users/${username}`, userData, {
+      .put(apiUrl + `users/${Username}`, userData, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -144,9 +144,9 @@ export class UserRegistrationService {
   // Makes the api call to delete user profile
   deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    const Username = localStorage.getItem('Username');
     return this.http
-      .delete(apiUrl + `users/${username}`, {
+      .delete(apiUrl + `users/${Username}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -157,9 +157,9 @@ export class UserRegistrationService {
   // Makes the api call to delete a movie from favorites
   deleteFavorite(MovieId: string): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    const Username = localStorage.getItem('Username');
     return this.http
-      .delete(apiUrl + `users/${username}/movies/${MovieId}`, {
+      .delete(apiUrl + `users/${Username}/movies/${MovieId}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
