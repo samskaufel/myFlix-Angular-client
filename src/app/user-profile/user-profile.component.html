@@ -1,10 +1,71 @@
 <app-navbar></app-navbar>
+<div style="text-align: center">
 <mat-card>
   <mat-card-title>Profile</mat-card-title>
   <br />
   <mat-dialog-content><b>Username:</b> {{ user.Username }}</mat-dialog-content>
   <br />
-  <mat-dialog-content><b>Password:</b> {{ user.Password }}</mat-dialog-content>
-  <br />
   <mat-dialog-content><b>Email:</b> {{ user.Email }}</mat-dialog-content>
+  <br />
+  <mat-dialog-content><b>Birthday:</b> {{ user.Birthday | date }}</mat-dialog-content>
 </mat-card>
+</div>
+<div>
+  <div style="text-align: center">
+    <h2 class="my-list-title">My List </h2>
+  <p class="my-list-subtitle" *ngIf="(favorites.length === 0)">Your favorite list is currently empty</p>
+<div class="my-list">
+  <!-- The ngFor directive (*ngFor) is used to loop through the favoriteMovies array in the component. A mat-card is 
+    then rendered for each movie -->
+  <mat-card
+      *ngFor="let favorite of favorites; let i = index"
+      class="favorite-card"
+  >
+    <mat-card-header class="fav-header">
+      <mat-card-title class="fav-title">{{ favorite.Title }}</mat-card-title>
+      <mat-card-subtitle class="fav-subtitle">
+        Directed by: {{ favorite.Director.Name }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <div class="img-container">
+      <img 
+        src="{{ favorite.ImagePath }}" 
+        alt="{{ favorite.Title }}"
+        style= "border: 1px solid black;height:320px!important"
+      />
+    </div>
+    <mat-card-actions>
+      <button
+          class="movie-details-btn"
+          mat-button
+          (click)='openGenreDialog(favorite.Genre.Name, favorite.Genre.Description)'
+      >
+          Genre
+      </button>
+      <button
+          class="movie-details-btn"
+          mat-button
+          (click)='openDirectorDialog(favorite.Director.Name, favorite.Director.Bio, favorite.Director.Born, favorite.Director.Died)'
+      >
+          Director
+      </button>
+      <button
+          class="movie-details-btn"
+          mat-button
+          (click)='openDescriptionDialog(favorite.Title, favorite.Description)'
+      >
+          Synopsis
+      </button>
+      <!-- Favorite icon -->
+      <button
+          mat-icon-button
+          (click)="removeFavorite(favorite._id, favorite.title)"
+      >
+      <mat-icon class="remove-btn">favorite</mat-icon>
+    </button>
+  </mat-card-actions>
+  </mat-card>
+</div>
+
+</div>
+
