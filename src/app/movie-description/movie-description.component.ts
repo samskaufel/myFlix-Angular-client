@@ -1,3 +1,8 @@
+/**
+ * The MovieDescription component renders a dialog containing the movie desription
+ * @module MovieDescriptionComponent
+ */
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
