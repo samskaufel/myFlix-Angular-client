@@ -1,3 +1,10 @@
+/**
+ * The navbar component displays a navbar at the top of the page once the user has logged in
+ * the navbar consists of links that routes the user to the 'movies' view and 'profile' view, and a logout button
+ * that brings the user back to the 'welcome' view
+ * @module NavbarComponent
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';

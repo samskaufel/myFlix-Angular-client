@@ -1,3 +1,8 @@
+/**
+ * The MovieGenre component renders the movie genre dialog when the user clicks on the button
+ * @module MovieGenreComponent
+ */
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -8,6 +13,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class MovieGenreComponent implements OnInit {
 
+  /**
+   * The data passed to the Movie Genre dialog is injected into the constructor
+   * using MAT_DIALOG_DATA and is then available to the view.
+   * @param data 
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {

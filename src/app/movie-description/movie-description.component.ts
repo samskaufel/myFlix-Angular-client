@@ -1,5 +1,6 @@
 /**
- * The MovieDescription component renders a dialog containing the movie desription
+ * The MovieDescription component renders a dialog containing the movie desription when user clicks on 
+ * the button
  * @module MovieDescriptionComponent
  */
 
@@ -13,6 +14,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class MovieDescriptionComponent implements OnInit {
 
+  /**
+   * The data passed to the Movie Description dialog is injected into the constructor
+   * using MAT_DIALOG_DATA and is then available to the view.
+   * @param data 
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {

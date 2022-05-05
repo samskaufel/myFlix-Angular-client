@@ -92,9 +92,9 @@ export class FetchApiDataService {
   // Makes the api call to get a user by name
   getUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('user');
+    const Username = localStorage.getItem('Username');
     return this.http
-      .get(apiUrl + `users/${username}`, {
+      .get(apiUrl + `users/${Username}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),

@@ -1,3 +1,8 @@
+/**
+ * The MovieDirector component renders the movie director dialog when the user clicks the button
+ * @module MovieDirectorComponent
+ */
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -8,6 +13,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class MovieDirectorComponent implements OnInit {
 
+  /**
+   * The data passed to the Movie Director dialog is injected into the constructor
+   * using MAT_DIALOG_DATA and is then available to the view.
+   * @param data 
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {

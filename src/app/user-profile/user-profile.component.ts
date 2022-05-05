@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+/**
+ * The UserProfileComponent renders the 'profile' view where user can view their 
+ * credentials, update their credentials, view their favorite movies list, and delete their
+ * account
+ * @module UserProfileComponent
+ */
+
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 // import components
 import { FetchApiDataService } from '../fetch-api-data.service';
-import { MovieDescriptionComponent } from '../movie-description/movie-description.component';
-import { MovieDirectorComponent } from '../movie-director/movie-director.component';
-import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
-
 
 @Component({
   selector: 'app-user-profile',
@@ -15,9 +18,15 @@ import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  user: any = {};
-  favorites: any[] = [];
-  movies: any[] = [];
+  userString: any = localStorage.getItem('user');
+  user: any = JSON.parse(this.userString);
+
+  @Input() userData = { 
+    Username: this.user.Username, 
+    Email: this.user.Email, 
+    Password: '', 
+    Birthday: this.user.Birthday
+  };
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -26,84 +35,62 @@ export class UserProfileComponent implements OnInit {
     public router: Router
   ) { }
 
+  /**
+   * This getUser lifecycle hook  method is called when Angular is done creating the component
+   * so that the data can be used to populate the template 
+   */
   ngOnInit(): void {
     this.getUser();
-    this.getFavorites();
+    console.log(this.userData);
   }
 
+  /**
+   * Invokes the getUser method on the fetchApiData service and populates the user object 
+   * with the response
+   */
   getUser(): void {
-    let user = localStorage.getItem('Username');
-    console.log(user);
-    this.fetchApiData.getUser().subscribe((res: any) => {
-      this.user = res;
-    });
-  }
-
-  getFavorites(): void {
-    this.fetchApiData.getAllMovies().subscribe((res: any) => {
-      this.favorites = res.filter((movie: any) => {
-        return this.user.Favorites.includes(movie._id)
+    const Username = localStorage.getItem('Username');
+    if (Username) {
+      this.fetchApiData.getUser().subscribe((res: any) => {
+        this.user = res;
+        console.log(this.user);
+        return this.user;
       });
-      console.log(this.favorites);
-      return this.favorites;
-    })
+    }
   }
 
-  removeFavorite(MovieId: string, Title: string): void {
-    this.fetchApiData.deleteFavorite(MovieId).subscribe((resp: any) => {
-      console.log(resp);
-      this.snackBar.open(
-        `${Title} has been removed from your favorites`,
-        'OK',
-        {
+  /**
+   * Takes userData from the form and invokes editUserProfile method on the fetchApiData 
+   * service to update the user object and save to localStorage
+   */
+  editUser(): void {
+    console.log(this.userData);
+    this.fetchApiData.editUser(this.userData).subscribe((resp) => {
+      localStorage.setItem('user', JSON.stringify(resp));
+      this.snackBar.open('Your profile was updated sucessfully', 'OK', {
+        duration: 3000,
+      });
+      setTimeout(() => {
+        window.location.reload();
+      });
+    });
+  }
+
+  /**
+   * This function deletes the user's data from the API and clears localStorage
+   * redirects user to the 'welcome' view and gives user a confirmation message 
+   * with snackBar 
+   */
+  deleteUser(): void {
+    if (confirm('Delete your profile?')) {
+      this.fetchApiData.deleteUser().subscribe(() => {
+        this.snackBar.open(`${this.user.Username} has successfully been deleted`, 'OK', {
           duration: 3000,
-        }
-      );
-      window.location.reload();
-      this.ngOnInit();
-    });
-    return this.getFavorites();
-  }
-
-  // this function will fetch the movies from the FetchApiDataService service via getAllMovies()
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      console.log(this.movies);
-      return this.movies;
-    });
-  }
-
-  openGenreDialog(name: string, description: string): void {
-    this.dialog.open(MovieGenreComponent, {
-      data: {
-        Name: name,
-        Description: description,
-      },
-      width: '500px'
-    });
-  }
-
-  openDirectorDialog(name: string, bio: string, born: string, died: string): void {
-    this.dialog.open(MovieDirectorComponent, {
-      data: {
-        Name: name,
-        Bio: bio,
-        Born: born,
-        Died: died,
-      },
-      width: '500px'
-    });
-  }
-
-  openDescriptionDialog(title: string, description: string): void {
-    this.dialog.open(MovieDescriptionComponent, {
-      data: {
-        Title: title,
-        Description: description
-      },
-      width: '500px'
-    });
+        });
+        localStorage.clear();
+      });
+      this.router.navigate(['welcome']);
+    }
   }
 
 }
