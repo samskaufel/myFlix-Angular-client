@@ -1,6 +1,11 @@
-/**
- * The MovieCard component renders all the movie cards and allows the user
- * to view details about the movie in dialogs
+/** 
+ * The MovieCardComponent is used to display the data retrieved from the movies collection of the
+ * myFlix database. The data is looped through using the ngFor directive and each movie is rendered as
+ * a card in the template. The cards display the title, director and an image of the movie and contains
+ * buttons that can be opened to display dialogs with more information about the director or genre, 
+ * or a movie description. Movies can be added to or removed from the user's favorites list by clicking on a 
+ * heart icon contained in the top right corner of each card. The heart color toggles accordingly to reflect 
+ * the movie's status.
  * @module MovieCardComponent
  */
 
