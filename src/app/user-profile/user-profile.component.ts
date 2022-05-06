@@ -33,8 +33,6 @@ export class UserProfileComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getUser();
-    this.user = JSON.parse(localStorage.getItem("user") as string);
-
   }
 
   /**
