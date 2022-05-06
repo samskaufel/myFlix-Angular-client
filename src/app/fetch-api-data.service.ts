@@ -36,7 +36,9 @@ export class FetchApiDataService {
    * This will provide HttpClient to the entire class, making it available via this.http
    * @param http 
    */
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+  ) {}
 
   /**
    * Makes the api call for the user registration endpoint
@@ -234,7 +236,7 @@ export class FetchApiDataService {
    * @param res The response to an Http request.
    * @returns Either the response or an empty object.
    */
-  private extractResponseData(res: any): any {
+   private extractResponseData(res: Response | Object): any {
     const body = res;
     return body || {};
   }

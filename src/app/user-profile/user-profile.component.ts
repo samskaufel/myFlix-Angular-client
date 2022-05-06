@@ -5,7 +5,7 @@
  * @module UserProfileComponent
  */
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -18,15 +18,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  // userString: any = localStorage.getItem('user');
-  // user: any = JSON.parse(this.userString);
-
-  // @Input() userData = { 
-  //   Username: this.user.Username, 
-  //   Email: this.user.Email, 
-  //   Password: '', 
-  //   Birthday: this.user.Birthday
-  // };
+  user: any = {};
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -40,24 +32,22 @@ export class UserProfileComponent implements OnInit {
    * so that the data can be used to populate the template 
    */
   ngOnInit(): void {
-    // this.getUser();
-    // console.log(this.userData);
+    this.getUser();
+    this.user = JSON.parse(localStorage.getItem("user") as string);
+
   }
 
   /**
    * Invokes the getUser method on the fetchApiData service and populates the user object 
    * with the response
    */
-  // getUser(): void {
-  //   const Username = localStorage.getItem('Username');
-  //   if (Username) {
-  //     this.fetchApiData.getUser().subscribe((res: any) => {
-  //       this.user = res;
-  //       console.log(this.user);
-  //       return this.user;
-  //     });
-  //   }
-  // }
+   getUser(): void {
+    let user = localStorage.getItem('Username');
+    console.log(user);
+    this.fetchApiData.getUser().subscribe((res: any) => {
+      this.user = res;
+    });
+   }
 
   /**
    * Takes userData from the form and invokes editUserProfile method on the fetchApiData 
