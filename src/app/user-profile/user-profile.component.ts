@@ -45,7 +45,7 @@ export class UserProfileComponent implements OnInit {
     this.fetchApiData.getUser().subscribe((res: any) => {
       this.user = res;
     });
-   }
+  }
 
   /**
    * Takes userData from the form and invokes editUserProfile method on the fetchApiData 

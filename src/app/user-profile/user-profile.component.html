@@ -1,16 +1,19 @@
 <app-navbar></app-navbar>
 <h2>Your Profile</h2>
-<div class="profile">
-  <div class="current-info">
-    <mat-card>
-      <mat-card-header>
+<div style="display: flex; justify-content: center">
+  <mat-card
+    style="width: 80%; text-align: center; margin: 15px; padding: 30px"
+  >
+    <mat-card-header>
+      <mat-card-title class="profile-title">
         <h3>Current Information</h3>
-      </mat-card-header>
-      <mat-card-content>
-        <h4>Username: {{user.Username}} </h4>
-        <h4>Email: {{user.Email}} </h4>
-        <h4>Birthday: {{user.Birthday | date }}</h4>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content> Username: {{ user.Username }}</mat-card-content>
+    <mat-card-content> Email: {{ user.Email }} </mat-card-content>
+    <mat-card-content>
+      Birthday:
+      {{ user.Birthday | date }}
+    </mat-card-content>
+  </mat-card>
 </div>
