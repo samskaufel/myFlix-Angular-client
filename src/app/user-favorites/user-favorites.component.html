@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
-<h2 class="my-list-title">My List </h2>
-<p class="my-list-subtitle" *ngIf="(favoriteMovies.length === 0)">There are no movies saved to your list.</p>
+<div class="user-favorites">
+<h2 class="title">My Favorites</h2>
+<p class="subtitle" *ngIf="(favoriteMovies.length === 0)">There are currently no movies saved to your list.</p>
 <div class="my-list">
 <!-- The ngFor directive (*ngFor) is used to loop through the favoriteMovies array in the component. A mat-card is 
   then rendered for each favorite -->
@@ -57,4 +58,5 @@
     </button>
   </mat-card-actions>
 </mat-card>
+</div>
 </div>

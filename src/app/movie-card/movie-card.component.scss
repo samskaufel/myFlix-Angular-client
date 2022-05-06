@@ -1,15 +1,12 @@
-#wrap_inner {
-  width: 3000px;
+h2 {
+  text-align: center;
 }
 
 .movie-card {
-  
+  flex-wrap: wrap;
   padding-bottom: 15px;
 }
 
-.mat-button {
-  padding: 0;
-}
 .mat-icon-button {
   color: red;
   position: absolute;
@@ -28,10 +25,6 @@
     width: 280px;
     margin: 15px;
     padding: 20px 3px;
-}
-
-.favourite-icon {
-  align-items: right;
 }
 
 img {

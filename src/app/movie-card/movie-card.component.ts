@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
 import { MovieDescriptionComponent } from '../movie-description/movie-description.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -31,6 +32,7 @@ export class MovieCardComponent implements OnInit {
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
+    public router: Router,
     ) { }
 
   /**

@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router'
 // imported components
 import { MovieDescriptionComponent } from '../movie-description/movie-description.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
@@ -27,6 +28,7 @@ export class UserFavoritesComponent implements OnInit {
     public dialog: MatDialog,
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
+    public router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -87,7 +89,7 @@ export class UserFavoritesComponent implements OnInit {
    * @param name 
    * @param description
    */
-     openGenreDialog(name: string, description: string): void {
+    openGenreDialog(name: string, description: string): void {
       this.dialog.open(MovieGenreComponent, {
         data: {
           Name: name,
