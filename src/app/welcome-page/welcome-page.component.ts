@@ -1,3 +1,9 @@
+/**
+ * The WelcomePageComponent is the main page that a user to directed to where they have
+ * the choice of logging in or registering
+ * @module WelcomePageComponent
+ */
+
 import { Component, OnInit } from '@angular/core';
 // imported components
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
@@ -11,6 +17,11 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class WelcomePageComponent implements OnInit {
 
+  /**
+   * Sets MatDialog as a property on the component class
+   * used to create dialogs for the registration and login forms.
+   * @param dialog 
+   */
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {

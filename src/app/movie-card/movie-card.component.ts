@@ -25,7 +25,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MovieCardComponent implements OnInit {
   // variable 'movies' declared as an array
   movies: any[] = [];
-  favorites: any[] = [];
+  favoriteMovies: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -33,10 +33,12 @@ export class MovieCardComponent implements OnInit {
     public snackBar: MatSnackBar,
     ) { }
 
-  // this lifecycle hook is called when Angular is done creating the component
+  /**
+   * this lifecycle hook is called when Angular is done creating the component
+   */
   ngOnInit(): void {
     this.getMovies();
-    this.getFavorites();
+    this.getFavoriteMovies();
   }
 
   /**
@@ -104,21 +106,12 @@ export class MovieCardComponent implements OnInit {
    * @function getUser
    * @returns an array with movie objects from user's favorites list
    */
-  getFavorites(): void {
+  getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
-      this.favorites = resp.FavoriteMovies;
-      console.log(this.favorites);
-      return this.favorites;
+      this.favoriteMovies = resp.FavoriteMovies;
+      console.log(this.favoriteMovies);
+      return this.favoriteMovies;
     });
-  }
-
-  /**
-   * returns if movie id is in user's favorites list
-   * @param MovieId 
-   * @returns true or false
-   */
-  isFavorited(MovieId: string): boolean{
-    return this.favorites.includes(MovieId);
   }
 
   /**
@@ -127,24 +120,25 @@ export class MovieCardComponent implements OnInit {
    * @param Title 
    * @returns an updated array of movie objects in the user's favorites list
    */
-  addFavorite(MovieId: string, Title: string): void {
-    this.fetchApiData.addFavorite(MovieId).subscribe((resp: any) => {
+  addFavoriteMovie(MovieID: string, Title: string): void {
+    this.fetchApiData.addFavoriteMovie(MovieID).subscribe((resp: any) => {
+      console.log(resp);
       this.snackBar.open(`${Title} has been added to your favorites`, 'OK', {
         duration: 3000,
       });
       this.ngOnInit();
     });
-    return this.getFavorites();
+    return this.getFavoriteMovies();
   }
 
   /**
    * removes movie from user's favorite list
-   * @param MovieId 
+   * @param MovieID 
    * @param Title 
    * @returns an updated array of movie objects in the user's favorites
    */
-  removeFavorite(MovieId: string, Title: string): void {
-    this.fetchApiData.deleteFavorite(MovieId).subscribe((resp: any) => {
+  removeFavoriteMovie(MovieID: string, Title: string): void {
+    this.fetchApiData.deleteFavoriteMovie(MovieID).subscribe((resp: any) => {
       console.log(resp);
       this.snackBar.open(
         `${Title} has been removed from your favorites`,
@@ -155,7 +149,30 @@ export class MovieCardComponent implements OnInit {
       );
       this.ngOnInit();
     });
-    return this.getFavorites();
+    return this.getFavoriteMovies();
+  }
+
+  /**
+   * returns if movie id is in user's favorites list
+   * @param MovieID
+   * @returns true or false
+   */
+   isFavorited(MovieID: string): boolean{
+    return this.favoriteMovies.includes(MovieID);
+  }
+
+  /**
+   * Function to add/remove favorite movie to/from FavoriteMovies list.
+   * If the movie is not on the favorite list, call @function addFavoriteMovie.
+   * If the movie is already on the user favorite list, call @function removeFavoriteMovie.
+   * @param movie the selected movie object
+   * @returns addFavoriteMovie or removeFavoriteMovie functions.
+   */
+   toggleFavorite(movie: any): void {
+    console.log(movie);
+    this.isFavorited(movie._id)
+      ? this.removeFavoriteMovie(movie._id, movie.Title)
+      : this.addFavoriteMovie(movie._id, movie.Title);
   }
 
 }

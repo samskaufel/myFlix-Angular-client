@@ -1,3 +1,12 @@
+/**
+ * The AppModule class is used to import then declare all of the components that will be used in the app, 
+ * as well as to import all of the modules that will be used. The AppComponent is bootstrapped when the
+ * module is bootstrapped, and thereby gets access to the module contents. By virtue of being children of
+ * the AppComponent (which is the root component), all the other components get access to exported 
+ * declarables of the imported modules in the AppModule too, as well as to the other child components.
+ * @module AppModule
+ */
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,12 +33,14 @@ import { MovieDirectorComponent } from './movie-director/movie-director.componen
 import { MovieDescriptionComponent } from './movie-description/movie-description.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserFavoritesComponent } from './user-favorites/user-favorites.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
   { path: 'profile', component: UserProfileComponent },
+  { path: 'favorites', component: UserFavoritesComponent},
 ];
 
 @NgModule({
@@ -43,7 +54,8 @@ const appRoutes: Routes = [
     MovieDirectorComponent,
     MovieDescriptionComponent,
     UserProfileComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserFavoritesComponent,
   ],
   imports: [
     BrowserModule,
