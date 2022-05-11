@@ -1,6 +1,28 @@
 # MyFlixAngularClient
 
+## Description
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+
+Using Angular, I built the client-side for an application called "myFlix" based on its existing server-side code (REST API and database). 
+
+## Objective
+This project allowed me to gain experience using Angular to build the same client-side interface I previously built with React.
+
+## Features
+- Displays a welcome view where users will be able to either log in or register an account
+- Displays a list of 10 movies 
+- Each movie card contains a button to show the movie description, genre information, and director information, as well as a favorite button 
+- A profile view where users can view and change their information
+- A favorites view where users can view and remove their favorites
+
+## Built Using
+- HTML
+- CSS
+- TypeScript
+- Angular
+- Node.js
+- Documentation generated with TypeDoc
 
 ## Development server
 
