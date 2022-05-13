@@ -10,6 +10,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router'
+import { combineLatest } from 'rxjs';
 // imported components
 import { MovieDescriptionComponent } from '../movie-description/movie-description.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
@@ -32,22 +33,20 @@ export class UserFavoritesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUser();
-    this.getFavoriteMovies();
+    this.getUserAndFavoriteMovies();
   }
 
-  /**
-   * Gets user data by making an API call 
-   */
-  getUser(): void {
-    const Username = localStorage.getItem('Username');
-    if (Username) {
-      this.fetchApiData.getUser().subscribe((res: any) => {
-        this.user = res;
-        console.log(this.user);
-        return this.user;
+  getUserAndFavoriteMovies() {
+    // this.isLoading = true;
+    combineLatest([this.fetchApiData.getUser(), this.fetchApiData.getAllMovies()]).subscribe(([user, movies]) => {
+      this.user = user;
+
+      this.favoriteMovies = movies.filter((movie: any) => {
+        return this.user.FavoriteMovies.includes(movie._id)
       });
-    }
+
+      // this.isLoading = false;
+    })
   }
 
   /**
