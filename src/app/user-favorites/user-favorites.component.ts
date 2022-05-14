@@ -37,15 +37,11 @@ export class UserFavoritesComponent implements OnInit {
   }
 
   getUserAndFavoriteMovies() {
-    // this.isLoading = true;
     combineLatest([this.fetchApiData.getUser(), this.fetchApiData.getAllMovies()]).subscribe(([user, movies]) => {
       this.user = user;
-
       this.favoriteMovies = movies.filter((movie: any) => {
         return this.user.FavoriteMovies.includes(movie._id)
       });
-
-      // this.isLoading = false;
     })
   }
 

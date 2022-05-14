@@ -2,8 +2,42 @@
   text-align: center;
 }
 
-.subtitle {
-  margin: 0.5rem 3rem 0;
-  font-size: 0.9rem;
+h2 {
   text-align: center;
+}
+
+.movie-card {
+  flex-wrap: wrap;
+  padding-bottom: 15px;
+}
+
+mat-card-title {
+  margin: 2px;
+  text-align: left;
+}
+
+.mat-icon-button {
+  color: red;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.mat-card {
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color:white;
+    max-width: 280px;
+    width: 280px;
+    margin: 15px;
+    padding: 20px 3px;
+}
+
+img {
+  width: 250px;
+  height: 350px;
+  object-fit: contain;
 }
