@@ -40,45 +40,11 @@ export class UserProfileComponent implements OnInit {
    * with the response
    */
    getUser(): void {
-    let user = localStorage.getItem('Username');
+    let user = localStorage.getItem('user');
     console.log(user);
     this.fetchApiData.getUser().subscribe((res: any) => {
       this.user = res;
     });
   }
-
-  /**
-   * Takes userData from the form and invokes editUserProfile method on the fetchApiData 
-   * service to update the user object and save to localStorage
-   */
-  // editUser(): void {
-  //   console.log(this.userData);
-  //   this.fetchApiData.editUser(this.userData).subscribe((resp) => {
-  //     localStorage.setItem('user', JSON.stringify(resp));
-  //     this.snackBar.open('Your profile was updated sucessfully', 'OK', {
-  //       duration: 3000,
-  //     });
-  //     setTimeout(() => {
-  //       window.location.reload();
-  //     });
-  //   });
-  // }
-
-  /**
-   * This function deletes the user's data from the API and clears localStorage
-   * redirects user to the 'welcome' view and gives user a confirmation message 
-   * with snackBar 
-   */
-  // deleteUser(): void {
-  //   if (confirm('Delete your profile?')) {
-  //     this.fetchApiData.deleteUser().subscribe(() => {
-  //       this.snackBar.open(`${this.user.Username} has successfully been deleted`, 'OK', {
-  //         duration: 3000,
-  //       });
-  //       localStorage.clear();
-  //     });
-  //     this.router.navigate(['welcome']);
-  //   }
-  // }
 
 }

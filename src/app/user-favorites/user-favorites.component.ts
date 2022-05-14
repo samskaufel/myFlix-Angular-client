@@ -36,6 +36,10 @@ export class UserFavoritesComponent implements OnInit {
     this.getUserAndFavoriteMovies();
   }
 
+  /**
+   * Gets user and then user's favorites from api 
+   * @returns user's favorites
+   */
   getUserAndFavoriteMovies() {
     combineLatest([this.fetchApiData.getUser(), this.fetchApiData.getAllMovies()]).subscribe(([user, movies]) => {
       this.user = user;
