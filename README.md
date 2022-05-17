@@ -18,7 +18,7 @@ This project allowed me to gain experience using Angular to build the same clien
 
 ## Built Using
 - HTML
-- CSS
+- SCSS
 - TypeScript
 - Angular
 - Node.js
