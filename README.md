@@ -20,6 +20,7 @@ This project allowed me to gain experience using Angular to build the same clien
 - HTML
 - SCSS
 - TypeScript
+- JavaScript
 - Angular
 - Node.js
 - Documentation generated with TypeDoc
